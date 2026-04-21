@@ -38,15 +38,15 @@ class Order:
 class CheckoutService:
     def process_order(self, order: Order, payment: Payment, coupon: Coupon = None) -> bool:
 
-        # etapa 1: precificação
+     
         if coupon:
             order.apply_coupon(coupon)
 
-        # etapa 2: validação transacional
+        
         if not payment.is_valid(order.final_amount):
             order.mark_failed()
             raise Exception("Pagamento insuficiente")
 
-        # etapa 3: commit lógico
+        
         order.mark_paid()
         return True
